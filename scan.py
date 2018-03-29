@@ -4,9 +4,7 @@ import socket
 import getopt
 import sys
 
-def scan():
-    ip = '127.0.0.1'
-    port = 3306
+def scan(ip,port):
     test_sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     result = test_sock.connect_ex((ip,port))
     if result == 0:
@@ -16,4 +14,11 @@ def scan():
 
 
 if __name__=='__main__':
-    scan()
+    try:
+        opts,args = getopt.getopt(sys.argv[1:],"",["port=","host="])
+    except getopt.GetoptError:
+        print("Parameter Error")
+        sys.exit(2)
+    print(opts)
+    print(args)
+    #scan(ip,port)
